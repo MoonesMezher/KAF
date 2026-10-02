@@ -1,0 +1,5 @@
+# Replace EXAMPLE.com with your production domain before launch.
+User-agent: *
+Allow: /
+
+Sitemap: https://EXAMPLE.com/sitemap.xml
