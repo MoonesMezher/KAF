@@ -6,87 +6,87 @@
 const projects = [
   {
     id: 1,
-    title: "Personal Brand Reel",
-    category: ["instagram", "short-form"],
-    platform: "Instagram",
-    type: "Personal Brand",
+    title: "ClinicLoop",
+    category: ["reels"],
+    platform: "Instagram Reels",
+    type: "Brand Commercial Reel",
     year: "2026",
     orientation: "portrait",
     layout: "portrait",
-    video: "assets/videos/project-01.mp4",
-    thumbnail: "assets/images/project-01.webp",
-    description: "[Placeholder] Short-form edit built around a strong hook and clean pacing for a personal brand.",
-    tools: ["Premiere Pro", "After Effects"]
+    video: "assets/videos/clincloop/clinicloop.mp4",
+    thumbnail: "assets/videos/clincloop/ClinicLoop.png",
+    description: "High-retention commercial cut engineered with kinetic typography, seamless pacing, and surgical sound design.",
+    tools: ["Premiere Pro", "After Effects", "Sound Design"]
   },
   {
     id: 2,
-    title: "Long-Form Story Cut",
-    category: ["youtube"],
-    platform: "YouTube",
-    type: "Long-form Content",
-    year: "2026",
-    orientation: "landscape",
-    layout: "wide",
-    video: "assets/videos/project-02.mp4",
-    thumbnail: "assets/images/project-02.webp",
-    description: "[Placeholder] Narrative-driven YouTube edit focused on retention, rhythm, and clear story beats.",
-    tools: ["Premiere Pro", "Audition"]
-  },
-  {
-    id: 3,
-    title: "Social Series Pack",
-    category: ["facebook", "short-form", "social-ads"],
-    platform: "Facebook",
-    type: "Social Media",
+    title: "Evanour",
+    category: ["motion"],
+    platform: "Motion Graphics",
+    type: "Motion Design",
     year: "2026",
     orientation: "portrait",
-    layout: "offset",
-    video: "assets/videos/project-03.mp4",
-    thumbnail: "assets/images/project-03.webp",
-    description: "[Placeholder] Multi-cut short-form package designed for feed performance and brand consistency.",
-    tools: ["Premiere Pro", "Motion Graphics"]
-  },
-  {
-    id: 4,
-    title: "Brand Spot",
-    category: ["cinematic", "social-ads"],
-    platform: "Multi-platform",
-    type: "Commercial",
-    year: "2026",
-    orientation: "landscape",
-    layout: "full",
-    video: "assets/videos/project-04.mp4",
-    thumbnail: "assets/images/project-04.webp",
-    description: "[Placeholder] Cinematic brand content with intentional color, sound, and editorial pacing.",
-    tools: ["Premiere Pro", "Color", "Sound Design"]
-  },
-  {
-    id: 5,
-    title: "Motion Opener",
-    category: ["motion", "youtube"],
-    platform: "YouTube",
-    type: "Motion Graphics",
-    year: "2026",
-    orientation: "landscape",
-    layout: "mid",
-    video: "assets/videos/project-05.mp4",
-    thumbnail: "assets/images/project-05.webp",
-    description: "[Placeholder] Title sequence and motion accents that support the story without overpowering it.",
+    layout: "wide",
+    video: "assets/videos/evanour/evanour.mp4",
+    thumbnail: "assets/videos/evanour/evanour.png",
+    description: "Sleek kinetic motion design showcase featuring polished 2D/3D visual accents, seamless transitions, and clean branding.",
     tools: ["After Effects", "Premiere Pro"]
   },
   {
+    id: 3,
+    title: "Graduation",
+    category: ["facebook"],
+    platform: "Facebook",
+    type: "Campaign / Documentary",
+    year: "2026",
+    orientation: "portrait",
+    layout: "offset",
+    video: "assets/videos/graduation/graduation.mp4",
+    thumbnail: "assets/videos/graduation/Graduation.png",
+    description: "Cinematic narrative crafted for high retention, emotional resonance, and viral Facebook reach.",
+    tools: ["Premiere Pro", "DaVinci Resolve"]
+  },
+  {
+    id: 4,
+    title: "Khaled Abo Fakher",
+    category: ["reels"],
+    platform: "Instagram Reels",
+    type: "Personal Brand Reel",
+    year: "2026",
+    orientation: "portrait",
+    layout: "full",
+    video: "assets/videos/khaled/2.mp4",
+    thumbnail: "assets/videos/khaled/me.jpg",
+    description: "Signature personal brand showcase cut emphasizing dynamic kinetic cuts, rhythm syncing, and rich soundscapes.",
+    tools: ["Premiere Pro", "After Effects", "Sound Design"]
+  },
+  {
+    id: 5,
+    title: "Moones Dev",
+    category: ["reels"],
+    platform: "Instagram Reels",
+    type: "Developer Showcase Reel",
+    year: "2026",
+    orientation: "portrait",
+    layout: "mid",
+    video: "assets/videos/moones dev/moones dev.mp4",
+    thumbnail: "assets/videos/moones dev/moones dev.png",
+    description: "Modern developer portfolio showcase cut designed for engagement, code animation clarity, and tech-forward aesthetics.",
+    tools: ["Premiere Pro", "After Effects"]
+  },
+  {
     id: 6,
-    title: "Creator Highlight",
-    category: ["instagram", "cinematic", "short-form"],
-    platform: "Instagram",
-    type: "Short-form",
+    title: "Roaya",
+    category: ["reels"],
+    platform: "Instagram Reels",
+    type: "Cinematic Reel",
     year: "2026",
     orientation: "portrait",
     layout: "portrait",
-    video: "assets/videos/project-06.mp4",
-    thumbnail: "assets/images/project-06.webp",
-    description: "[Placeholder] Vertical cinematic cut shaped for Reels — mood, timing, and a memorable finish.",
-    tools: ["Premiere Pro", "Color"]
+    video: "assets/videos/roaya/roaya.mp4",
+    thumbnail: "assets/videos/roaya/Roaya.png",
+    description: "Vibrant visual reel showcasing high-energy pacing, vivid color grading, and infectious rhythmic sound design.",
+    tools: ["Premiere Pro", "DaVinci Resolve", "Sound Design"]
   }
 ];
 
@@ -121,66 +121,35 @@ const Portfolio = (() => {
     `;
   }
 
-  function createMedia(project, index) {
-    const num = index + 1;
-    return `
-      <div class="work-item__media">
-        <video
-          class="work-item__video"
-          muted
-          loop
-          playsinline
-          preload="none"
-          data-src="${project.video}"
-          poster="${project.thumbnail}"
-          aria-hidden="true"
-        ></video>
-        <img
-          class="work-item__thumb"
-          src="${project.thumbnail}"
-          alt="${project.title} — ${project.type} edit"
-          width="1280"
-          height="720"
-          loading="lazy"
-          data-fallback="true"
-        >
-        ${createPlaceholder(num)}
-      </div>
-    `;
-  }
-
   function createItem(project, index) {
-    const num = index + 1;
     const cats = project.category.join(" ");
-    // Use one layout class only — avoid conflicting grid rules
-    const layoutKey = project.layout || (project.orientation === "portrait" ? "portrait" : "wide");
-    const layoutClass = LAYOUT_CLASS[layoutKey] || LAYOUT_CLASS.wide;
 
     return `
       <article
-        class="work-item ${layoutClass}"
+        class="work-item"
         role="listitem"
         data-id="${project.id}"
+        data-video="${project.video}"
         data-categories="${cats}"
-        data-orientation="${project.orientation}"
         data-cursor="PLAY"
         tabindex="0"
-        aria-label="${project.title} — ${project.platform}"
+        aria-label="${project.title}"
       >
-        ${createMedia(project, index)}
-        <div class="work-item__info">
-          <span class="work-item__index">${pad(num)}</span>
-          <h3 class="work-item__title">${project.title}</h3>
-          <div class="work-item__meta">
-            <span>${project.type}</span>
-            <span>${project.platform}</span>
-            <span>${project.year || "2026"}</span>
+        <div class="work-item__media">
+          <img
+            class="work-item__thumb"
+            src="${project.thumbnail}"
+            alt="${project.title}"
+            width="1280"
+            height="720"
+            loading="lazy"
+          >
+          <div class="work-item__play-overlay" aria-hidden="true">
+            <div class="work-item__play-icon-circle">
+              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+            </div>
           </div>
-          <p class="work-item__desc">${project.description}</p>
-          <ul class="work-item__tools">
-            ${project.tools.map((t) => `<li>${t}</li>`).join("")}
-          </ul>
-          <span class="work-item__view">VIEW PROJECT <span aria-hidden="true">↗</span></span>
+          ${createPlaceholder(index + 1)}
         </div>
       </article>
     `;
@@ -207,7 +176,6 @@ const Portfolio = (() => {
 
     items.forEach((item) => {
       const thumb = item.querySelector(".work-item__thumb");
-      const video = item.querySelector(".work-item__video");
       const placeholder = item.querySelector(".work-item__placeholder");
 
       if (thumb) {
@@ -224,105 +192,66 @@ const Portfolio = (() => {
           if (placeholder) placeholder.style.display = "none";
         }
       }
-
-      if (video) {
-        video.addEventListener("error", () => {
-          video.removeAttribute("src");
-          video.load();
-        });
-      }
     });
   }
 
-  function loadVideoSource(video) {
-    if (!video || video.dataset.loaded === "true") return Promise.resolve(true);
-    const src = video.dataset.src;
-    if (!src) return Promise.resolve(false);
+  function activateVideo(item) {
+    const media = item.querySelector(".work-item__media");
+    if (!media) return;
 
-    video.src = src;
-    video.dataset.loaded = "true";
-
-    return new Promise((resolve) => {
-      const onReady = () => {
-        video.removeEventListener("loadeddata", onReady);
-        video.removeEventListener("error", onError);
-        resolve(true);
-      };
-      const onError = () => {
-        video.removeEventListener("loadeddata", onReady);
-        video.removeEventListener("error", onError);
-        video.dataset.loaded = "error";
-        resolve(false);
-      };
-      video.addEventListener("loadeddata", onReady);
-      video.addEventListener("error", onError);
-      video.load();
-    });
-  }
-
-  async function playPreview(item) {
-    const id = item.dataset.id;
-    activeHoverId = id;
-
-    const video = item.querySelector(".work-item__video");
-    const thumb = item.querySelector(".work-item__thumb");
-    if (!video) return;
-
-    const ok = await loadVideoSource(video);
-    if (!ok || activeHoverId !== id) return;
-
-    try {
-      await video.play();
-      if (thumb) thumb.style.opacity = "0";
-      video.style.opacity = "1";
-    } catch (_) {
-      /* keep thumbnail */
-    }
-  }
-
-  function pausePreview(item) {
-    const video = item.querySelector(".work-item__video");
-    const thumb = item.querySelector(".work-item__thumb");
-    if (!video) return;
-
-    video.pause();
-    video.currentTime = 0;
-    video.style.opacity = "0";
-    if (thumb) thumb.style.opacity = "1";
-  }
-
-  function setDimState(activeItem) {
-    const items = grid.querySelectorAll(".work-item");
-    items.forEach((item) => {
-      if (!activeItem) {
-        item.classList.remove("is-dimmed");
+    let video = media.querySelector(".work-item__video");
+    if (video) {
+      if (video.paused) {
+        video.play().catch(() => {});
       } else {
-        item.classList.toggle("is-dimmed", item !== activeItem);
+        video.pause();
       }
+      return;
+    }
+
+    // Stop and remove video from any other item in grid so only one plays at a time
+    const allVideos = grid.querySelectorAll(".work-item__video");
+    allVideos.forEach((v) => {
+      v.pause();
+      const parentMedia = v.closest(".work-item__media");
+      if (parentMedia) {
+        const thumb = parentMedia.querySelector(".work-item__thumb");
+        const overlay = parentMedia.querySelector(".work-item__play-overlay");
+        if (thumb) thumb.style.display = "";
+        if (overlay) overlay.style.display = "";
+      }
+      v.remove();
     });
 
-    document.body.classList.toggle("is-work-focus", Boolean(activeItem));
+    const videoSrc = item.dataset.video;
+    if (!videoSrc) return;
+
+    const thumb = media.querySelector(".work-item__thumb");
+    const overlay = media.querySelector(".work-item__play-overlay");
+
+    video = document.createElement("video");
+    video.className = "work-item__video is-active";
+    video.src = videoSrc;
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+
+    if (thumb) thumb.style.display = "none";
+    if (overlay) overlay.style.display = "none";
+
+    media.appendChild(video);
+    video.play().catch(() => {});
   }
 
   function bindItemEvents() {
     const items = grid.querySelectorAll(".work-item");
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     items.forEach((item) => {
-      if (canHover) {
-        item.addEventListener("mouseenter", () => {
-          playPreview(item);
-          setDimState(item);
-        });
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        openProject(item.dataset.id);
+      });
 
-        item.addEventListener("mouseleave", () => {
-          activeHoverId = null;
-          pausePreview(item);
-          setDimState(null);
-        });
-      }
-
-      item.addEventListener("click", () => openProject(item.dataset.id));
       item.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -330,27 +259,25 @@ const Portfolio = (() => {
         }
       });
     });
-
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) {
-              pausePreview(entry.target);
-              entry.target.classList.remove("is-dimmed");
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
-      items.forEach((item) => io.observe(item));
-    }
   }
 
   function openProject(id) {
     const project = projects.find((p) => String(p.id) === String(id));
-    if (!project || typeof window.openProjectModal !== "function") return;
-    window.openProjectModal(project);
+    if (!project) return;
+    if (typeof window.openProjectModal === "function") {
+      window.openProjectModal(project);
+    } else {
+      const modal = document.getElementById("project-modal");
+      const video = document.getElementById("modal-video");
+      const title = document.getElementById("modal-title");
+      if (modal && video) {
+        if (title) title.textContent = project.title;
+        video.src = project.video;
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        video.play().catch(() => {});
+      }
+    }
   }
 
   function bindFilters() {
@@ -376,7 +303,7 @@ const Portfolio = (() => {
     render("all");
   }
 
-  return { init, render, projects, loadVideoSource };
+  return { init, render, projects, activateVideo };
 })();
 
 window.Portfolio = Portfolio;

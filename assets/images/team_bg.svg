@@ -1,0 +1,160 @@
+<svg width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Radial Reticle Soft Glow -->
+    <radialGradient id="hudCenterGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#15616D" stop-opacity="0.18"/>
+      <stop offset="55%" stop-color="#15616D" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#15616D" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Linear Fade Gradient for Outer Brackets -->
+    <linearGradient id="hudStrokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15616D" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#228B99" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#15616D" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <!-- Subtle White Grid Gradient -->
+    <linearGradient id="hudWhiteSubtle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Center Lens Glow -->
+  <circle cx="500" cy="500" r="380" fill="url(#hudCenterGlow)"/>
+
+  <!-- ============================================================
+       1. CAMERA VIEWFINDER OUTER BOUNDING FRAME & CORNER BRACKETS
+       ============================================================ -->
+  <!-- Outer Dotted Framing Box -->
+  <rect x="80" y="80" width="840" height="840" rx="6" stroke="url(#hudWhiteSubtle)" stroke-width="1" stroke-dasharray="8 12" stroke-opacity="0.35"/>
+
+  <!-- Top-Left Corner Bracket -->
+  <path d="M80 160 V80 H160" stroke="#15616D" stroke-width="2.5" stroke-linecap="square"/>
+  <line x1="80" y1="80" x2="96" y2="96" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.7"/>
+  <circle cx="168" cy="80" r="3" fill="#15616D"/>
+
+  <!-- Top-Right Corner Bracket -->
+  <path d="M920 160 V80 H840" stroke="#15616D" stroke-width="2.5" stroke-linecap="square"/>
+  <line x1="920" y1="80" x2="904" y2="96" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.7"/>
+  <circle cx="832" cy="80" r="3" fill="#15616D"/>
+
+  <!-- Bottom-Left Corner Bracket -->
+  <path d="M80 840 V920 H160" stroke="#15616D" stroke-width="2.5" stroke-linecap="square"/>
+  <line x1="80" y1="920" x2="96" y2="904" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.7"/>
+  <circle cx="168" cy="920" r="3" fill="#15616D"/>
+
+  <!-- Bottom-Right Corner Bracket -->
+  <path d="M920 840 V920 H840" stroke="#15616D" stroke-width="2.5" stroke-linecap="square"/>
+  <line x1="920" y1="920" x2="904" y2="904" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.7"/>
+  <circle cx="832" cy="920" r="3" fill="#15616D"/>
+
+  <!-- ============================================================
+       2. CONCENTRIC FOCUS RETICLES & DEGREE TARGET RINGS
+       ============================================================ -->
+  <!-- Outer Segmented Ring with Angle Markers -->
+  <circle cx="500" cy="500" r="410" stroke="#15616D" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="16 10 3 10"/>
+
+  <!-- Focus Target Ring 2 (Encircling avatar) -->
+  <circle cx="500" cy="500" r="330" stroke="#228B99" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="64 16 8 16"/>
+
+  <!-- Focus Target Ring 1 (Mid ring) -->
+  <circle cx="500" cy="500" r="260" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="6 6"/>
+
+  <!-- Inner Reticle Border -->
+  <circle cx="500" cy="500" r="210" stroke="#15616D" stroke-opacity="0.35" stroke-width="1"/>
+
+  <!-- 45-degree Target Notch Angles -->
+  <line x1="260" y1="260" x2="280" y2="280" stroke="#15616D" stroke-width="2" stroke-opacity="0.5"/>
+  <line x1="740" y1="260" x2="720" y2="280" stroke="#15616D" stroke-width="2" stroke-opacity="0.5"/>
+  <line x1="260" y1="740" x2="280" y2="720" stroke="#15616D" stroke-width="2" stroke-opacity="0.5"/>
+  <line x1="740" y1="740" x2="720" y2="720" stroke="#15616D" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- ============================================================
+       3. AXIS RULERS & CROSSHAIR MARKS
+       ============================================================ -->
+  <!-- Horizontal Center Line (Left) -->
+  <line x1="100" y1="500" x2="270" y2="500" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
+  <line x1="140" y1="494" x2="140" y2="506" stroke="#15616D" stroke-width="1.5"/>
+  <line x1="180" y1="496" x2="180" y2="504" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1"/>
+  <line x1="220" y1="492" x2="220" y2="508" stroke="#15616D" stroke-width="2"/>
+  <circle cx="270" cy="500" r="3" fill="#15616D"/>
+
+  <!-- Horizontal Center Line (Right) -->
+  <line x1="730" y1="500" x2="900" y2="500" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
+  <circle cx="730" cy="500" r="3" fill="#15616D"/>
+  <line x1="780" y1="492" x2="780" y2="508" stroke="#15616D" stroke-width="2"/>
+  <line x1="820" y1="496" x2="820" y2="504" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1"/>
+  <line x1="860" y1="494" x2="860" y2="506" stroke="#15616D" stroke-width="1.5"/>
+
+  <!-- Vertical Center Line (Top) -->
+  <line x1="500" y1="100" x2="500" y2="270" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
+  <line x1="494" y1="140" x2="506" y2="140" stroke="#15616D" stroke-width="1.5"/>
+  <line x1="496" y1="180" x2="504" y2="180" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1"/>
+  <line x1="492" y1="220" x2="508" y2="220" stroke="#15616D" stroke-width="2"/>
+  <circle cx="500" cy="270" r="3" fill="#15616D"/>
+
+  <!-- Vertical Center Line (Bottom) -->
+  <line x1="500" y1="730" x2="500" y2="900" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
+  <circle cx="500" cy="730" r="3" fill="#15616D"/>
+  <line x1="492" y1="780" x2="508" y2="780" stroke="#15616D" stroke-width="2"/>
+  <line x1="496" y1="820" x2="504" y2="820" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1"/>
+  <line x1="494" y1="860" x2="506" y2="860" stroke="#15616D" stroke-width="1.5"/>
+
+  <!-- ============================================================
+       4. CINEMATIC TELEMETRY & HUD METADATA
+       ============================================================ -->
+  <!-- Top Left: REC + Status -->
+  <g font-family="'B612 Mono', 'Courier New', monospace" font-size="13" letter-spacing="1.5" fill="#FFFFFF">
+    <circle cx="106" cy="116" r="5" fill="#FF3B30"/>
+    <circle cx="106" cy="116" r="9" stroke="#FF3B30" stroke-opacity="0.4" stroke-width="1"/>
+    <text x="126" y="121" font-weight="700">REC</text>
+    <text x="175" y="121" fill="#15616D" font-weight="700">RAW 4K</text>
+    <text x="260" y="121" fill="#D1D1D1" fill-opacity="0.6">23.98 FPS</text>
+  </g>
+
+  <!-- Top Right: Exposure Settings -->
+  <g font-family="'B612 Mono', 'Courier New', monospace" font-size="13" letter-spacing="1.5" fill="#D1D1D1" fill-opacity="0.6" text-anchor="end">
+    <text x="895" y="121">ISO 800 • 1/48s • 5600K</text>
+  </g>
+
+  <!-- Left Center: Audio Channel Meters -->
+  <g transform="translate(100, 420)">
+    <text x="0" y="-10" font-family="'B612 Mono', monospace" font-size="9" fill="#15616D" font-weight="700">AUDIO CH1/2</text>
+    <rect x="0" y="0" width="4" height="150" fill="#FFFFFF" fill-opacity="0.1" rx="2"/>
+    <rect x="0" y="40" width="4" height="110" fill="#15616D" fill-opacity="0.75" rx="2"/>
+    <rect x="0" y="40" width="4" height="15" fill="#228B99" rx="2"/>
+    <rect x="8" y="0" width="4" height="150" fill="#FFFFFF" fill-opacity="0.1" rx="2"/>
+    <rect x="8" y="55" width="4" height="95" fill="#15616D" fill-opacity="0.75" rx="2"/>
+    <rect x="8" y="55" width="4" height="15" fill="#228B99" rx="2"/>
+    <line x1="16" y1="0" x2="22" y2="0" stroke="#FFFFFF" stroke-opacity="0.3"/>
+    <line x1="16" y1="40" x2="22" y2="40" stroke="#FFFFFF" stroke-opacity="0.3"/>
+    <text x="26" y="44" font-family="'B612 Mono', monospace" font-size="8" fill="#FFFFFF" fill-opacity="0.5">-12dB</text>
+    <line x1="16" y1="150" x2="22" y2="150" stroke="#FFFFFF" stroke-opacity="0.3"/>
+  </g>
+
+  <!-- Right Center: Histogram & Focus Peak Status -->
+  <g transform="translate(860, 430)">
+    <rect x="0" y="0" width="40" height="55" stroke="#FFFFFF" stroke-opacity="0.2" fill="#15616D" fill-opacity="0.08" rx="2"/>
+    <path d="M0 50 Q 8 32, 14 20 T 25 12 T 32 30 T 40 50 Z" fill="#15616D" fill-opacity="0.4"/>
+    <path d="M0 50 Q 8 32, 14 20 T 25 12 T 32 30 T 40 50" stroke="#228B99" stroke-width="1.2" fill="none"/>
+    <g transform="translate(0, 68)">
+      <rect x="0" y="0" width="40" height="42" stroke="#FFFFFF" stroke-opacity="0.2" fill="none" rx="2"/>
+      <text x="20" y="18" text-anchor="middle" font-family="'B612 Mono', monospace" font-size="8" fill="#15616D" font-weight="700">FOCUS</text>
+      <text x="20" y="32" text-anchor="middle" font-family="'B612 Mono', monospace" font-size="10" fill="#FFFFFF" fill-opacity="0.8">LOCK</text>
+    </g>
+  </g>
+
+  <!-- Bottom Left: Lens & Scope Telemetry -->
+  <g font-family="'B612 Mono', 'Courier New', monospace" font-size="12" letter-spacing="1.5" fill="#D1D1D1" fill-opacity="0.6">
+    <text x="106" y="885">35mm T1.5 CINE • ANAMORPHIC</text>
+  </g>
+
+  <!-- Bottom Right: Codec & Timecode -->
+  <g font-family="'B612 Mono', 'Courier New', monospace" font-size="12" letter-spacing="1.5" fill="#D1D1D1" fill-opacity="0.6" text-anchor="end">
+    <text x="895" y="885">LOG-C • TC 00:14:52:19</text>
+  </g>
+
+</svg>

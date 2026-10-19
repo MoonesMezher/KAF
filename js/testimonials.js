@@ -28,7 +28,7 @@ const QuoteSlider = (() => {
   }
 
   function goTo(index, dir = 1) {
-    if (locked || !slides.length) return;
+    if (locked || slides.length < 2) return;
     const next = (index + slides.length) % slides.length;
     if (next === current) return;
 

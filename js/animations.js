@@ -6,14 +6,19 @@
 const Animations = (() => {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function dismissPreloader(preloader) {
+    if (!preloader) return;
+    preloader.classList.add("is-done");
+    preloader.style.display = "none";
+    document.body.classList.add("is-loaded");
+  }
+
   function initPreloader() {
     const preloader = document.getElementById("preloader");
     if (!preloader) return Promise.resolve();
 
-    if (reducedMotion) {
-      preloader.classList.add("is-done");
-      preloader.style.display = "none";
-      document.body.classList.add("is-loaded");
+    if (reducedMotion || typeof gsap === "undefined") {
+      dismissPreloader(preloader);
       return Promise.resolve();
     }
 
@@ -23,16 +28,21 @@ const Animations = (() => {
     const mark = preloader.querySelector(".preloader__mark");
 
     return new Promise((resolve) => {
+      // Robust failsafe: dismiss after 1.8s so user is NEVER blocked
+      const fallbackTimer = setTimeout(() => {
+        dismissPreloader(preloader);
+        resolve();
+      }, 1800);
+
       const tl = gsap.timeline({
         onComplete: () => {
           gsap.to(preloader, {
             yPercent: -100,
-            duration: 0.85,
+            duration: 0.65,
             ease: "power4.inOut",
             onComplete: () => {
-              preloader.classList.add("is-done");
-              preloader.style.display = "none";
-              document.body.classList.add("is-loaded");
+              clearTimeout(fallbackTimer);
+              dismissPreloader(preloader);
               resolve();
             }
           });
@@ -118,123 +128,77 @@ const Animations = (() => {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.utils.toArray(".section-header").forEach((header) => {
-      gsap.from(header.children, {
+    // Minux section titles & headers
+    gsap.utils.toArray(".section-title-box, .section-header__title, .video-header-flex, .work-header-flex, .process-title-flex, .testimonials-title-flex").forEach((header) => {
+      gsap.from(header, {
         scrollTrigger: {
           trigger: header,
-          start: "top 85%",
+          start: "top 88%",
           toggleActions: "play none none none"
         },
-        y: 36,
+        y: 28,
         opacity: 0,
         duration: 0.85,
-        stagger: 0.08,
         ease: "power3.out"
       });
     });
 
-    const creatorLines = document.querySelectorAll(".creator__line");
-    if (creatorLines.length) {
-      gsap.from(creatorLines, {
-        scrollTrigger: {
-          trigger: ".creator",
-          start: "top 70%"
-        },
-        y: 70,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.08,
-        ease: "power4.out"
-      });
-    }
-
-    gsap.from(".creator__statement", {
-      scrollTrigger: { trigger: ".creator__statement", start: "top 85%" },
-      y: 28,
+    // Process cards stagger
+    gsap.from(".process-items", {
+      scrollTrigger: { trigger: ".process-wrapper", start: "top 80%" },
+      y: 40,
       opacity: 0,
-      duration: 0.85,
+      duration: 0.8,
+      stagger: 0.1,
       ease: "power3.out"
     });
 
-    gsap.from(".creator__platforms li", {
-      scrollTrigger: { trigger: ".creator__platforms", start: "top 90%" },
-      y: 18,
-      opacity: 0,
-      duration: 0.55,
-      stagger: 0.05,
-      ease: "power3.out"
-    });
-
+    // Capabilities reveal
     gsap.utils.toArray(".capability").forEach((item, i) => {
       gsap.from(item, {
         scrollTrigger: { trigger: item, start: "top 90%" },
-        x: i % 2 === 0 ? -36 : 36,
+        x: i % 2 === 0 ? -28 : 28,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.75,
         ease: "power3.out"
       });
     });
 
-    gsap.from(".process__stage", {
-      scrollTrigger: { trigger: ".process__stages", start: "top 80%" },
-      y: 44,
+    // About content
+    gsap.from(".about__content > *", {
+      scrollTrigger: { trigger: ".about__content", start: "top 75%" },
+      y: 30,
       opacity: 0,
-      duration: 0.75,
+      duration: 0.8,
       stagger: 0.08,
       ease: "power3.out"
     });
 
-    gsap.from(".about__content > *", {
-      scrollTrigger: { trigger: ".about__content", start: "top 75%" },
-      y: 32,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.09,
-      ease: "power3.out"
-    });
-
-    const philA = document.querySelector(".philosophy__line--a");
-    const philB = document.querySelector(".philosophy__line--b");
-    const philSign = document.querySelector(".philosophy__sign");
-
-    if (philA && philB) {
-      const philTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".philosophy",
-          start: "top 60%",
-          toggleActions: "play none none reverse"
-        }
-      });
-
-      philTl.from(philA, { opacity: 0, y: 36, duration: 0.95, ease: "power3.out" });
-      philTl.from(philB, { opacity: 0, y: 48, duration: 1.05, ease: "power3.out" }, "+=0.2");
-      philTl.from(philSign, { opacity: 0, duration: 0.7, ease: "power2.out" }, "-=0.25");
-    }
-
     // Testimonials section reveal
     gsap.from(".quote-slider", {
-      scrollTrigger: { trigger: ".testimonials", start: "top 80%" },
+      scrollTrigger: { trigger: ".testimonials-section", start: "top 80%" },
       y: 30,
       opacity: 0,
       duration: 0.9,
       ease: "power3.out"
     });
 
-    gsap.from(".cta__index, .cta__title span, .cta__sub span, .cta .btn, .cta__socials, .cta__note", {
-      scrollTrigger: { trigger: ".cta", start: "top 75%" },
-      y: 36,
+    // CTA section reveal
+    gsap.from(".cta__title > *, .cta__button-wrap, .cta__socials-box, .cta__status-badge", {
+      scrollTrigger: { trigger: ".cta-section", start: "top 75%" },
+      y: 32,
       opacity: 0,
       duration: 0.85,
-      stagger: 0.07,
+      stagger: 0.08,
       ease: "power3.out"
     });
 
     gsap.utils.toArray(".work-item").forEach((item) => {
       gsap.from(item, {
         scrollTrigger: { trigger: item, start: "top 88%" },
-        y: 44,
+        y: 36,
         opacity: 0,
-        duration: 0.85,
+        duration: 0.8,
         ease: "power3.out"
       });
     });
@@ -277,7 +241,7 @@ const Animations = (() => {
 
   async function init() {
     if (typeof gsap === "undefined") {
-      document.body.classList.add("is-loaded");
+      dismissPreloader(document.getElementById("preloader"));
       return;
     }
 
