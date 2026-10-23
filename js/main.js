@@ -356,14 +356,78 @@
     const handle = document.getElementById("compare-handle");
     const beforeVideo = document.getElementById("before-video");
     const afterVideo = document.getElementById("after-video");
+    const audioBtn = document.getElementById("compare-audio-toggle");
 
     if (!stage || !before || !handle) return;
 
+    let isMuted = true; // Starts muted so browsers allow instant autoplay; unmutes via toggle button or first stage interaction
     let ratio = 0.5;
     let dragging = false;
     let pendingX = null;
     let dragRaf = null;
     let stageWidth = 0;
+
+    /* ------------------------------------------
+       After Video Audio Playback (Single Audio Track)
+       Only the After / Final Master video plays audio.
+       The Raw / Before video is permanently muted.
+    ------------------------------------------ */
+    function applyAudioMix() {
+      if (!beforeVideo || !afterVideo) return;
+
+      // Raw / Before video audio is always permanently muted
+      beforeVideo.muted = true;
+      beforeVideo.volume = 0;
+
+      // Only After / Final video plays audio
+      if (isMuted) {
+        afterVideo.muted = true;
+      } else {
+        afterVideo.muted = false;
+        afterVideo.volume = 1;
+      }
+      updateAudioUI();
+    }
+
+    function updateAudioUI() {
+      if (!audioBtn) return;
+      audioBtn.setAttribute("aria-pressed", String(!isMuted));
+      audioBtn.classList.toggle("is-muted", isMuted);
+      const label = audioBtn.querySelector(".compare__audio-label");
+      if (label) {
+        label.textContent = isMuted ? "TAP FOR SOUND" : "AFTER AUDIO";
+      }
+    }
+
+    function playBothVideos() {
+      if (!beforeVideo || !afterVideo) return;
+      applyAudioMix();
+      if (beforeVideo.paused) beforeVideo.play().catch(() => {});
+      if (afterVideo.paused) afterVideo.play().catch(() => {});
+    }
+
+    function toggleAudio(e) {
+      if (e) e.stopPropagation();
+      isMuted = !isMuted;
+      applyAudioMix();
+      playBothVideos();
+      updateAudioUI();
+    }
+
+    if (audioBtn) {
+      audioBtn.addEventListener("click", toggleAudio);
+    }
+
+    // Allow user to unmute when interacting directly with the compare stage
+    function tryUnmuteOnInteraction() {
+      if (isMuted) {
+        isMuted = false;
+        applyAudioMix();
+        playBothVideos();
+      }
+      stage.removeEventListener("pointerdown", tryUnmuteOnInteraction);
+    }
+    stage.addEventListener("pointerdown", tryUnmuteOnInteraction, { passive: true });
 
     function measure() {
       stageWidth = stage.getBoundingClientRect().width || 1;
@@ -470,98 +534,6 @@
 
     setupCompareVideo(beforeVideo);
     setupCompareVideo(afterVideo);
-
-    /* ------------------------------------------
-       Dynamic Crossfading Audio Mix
-       Playhead at extreme right (ratio >= 0.78) -> 100% RAW music
-       Playhead reversed/left (ratio <= 0.42) -> 100% MASTER music
-       In between -> Smooth equal-power crossfade
-    ------------------------------------------ */
-    const audioBtn = document.getElementById("compare-audio-toggle");
-    let isMuted = true; // Starts muted so browsers allow instant autoplay; unmutes on first touch/drag
-
-    function applyAudioMix() {
-      if (!beforeVideo || !afterVideo) return;
-
-      if (isMuted) {
-        beforeVideo.muted = true;
-        afterVideo.muted = true;
-      } else {
-        beforeVideo.muted = false;
-        afterVideo.muted = false;
-
-        let rawVol = 0;
-        let finalVol = 1;
-
-        if (ratio <= 0.42) {
-          rawVol = 0;
-          finalVol = 1;
-        } else if (ratio >= 0.78) {
-          rawVol = 1;
-          finalVol = 0;
-        } else {
-          const t = (ratio - 0.42) / (0.78 - 0.42); // 0 to 1
-          rawVol = Math.sin((t * Math.PI) / 2);
-          finalVol = Math.cos((t * Math.PI) / 2);
-        }
-
-        beforeVideo.volume = Math.max(0, Math.min(1, rawVol));
-        afterVideo.volume = Math.max(0, Math.min(1, finalVol));
-      }
-      updateAudioUI();
-    }
-
-    function updateAudioUI() {
-      if (!audioBtn) return;
-      audioBtn.setAttribute("aria-pressed", String(!isMuted));
-      audioBtn.classList.toggle("is-muted", isMuted);
-      const label = audioBtn.querySelector(".compare__audio-label");
-      if (label) {
-        if (isMuted) {
-          label.textContent = "TAP FOR SOUND";
-        } else if (ratio >= 0.78) {
-          label.textContent = "RAW AUDIO";
-        } else if (ratio <= 0.42) {
-          label.textContent = "MASTER AUDIO";
-        } else {
-          label.textContent = "CROSSFADE";
-        }
-      }
-    }
-
-    function playBothVideos() {
-      if (!beforeVideo || !afterVideo) return;
-      applyAudioMix();
-      if (beforeVideo.paused) beforeVideo.play().catch(() => {});
-      if (afterVideo.paused) afterVideo.play().catch(() => {});
-    }
-
-    function toggleAudio(e) {
-      if (e) e.stopPropagation();
-      isMuted = !isMuted;
-      applyAudioMix();
-      playBothVideos();
-      updateAudioUI();
-    }
-
-    if (audioBtn) {
-      audioBtn.addEventListener("click", toggleAudio);
-    }
-
-    // Auto-unmute on first user interaction anywhere on the document or stage
-    function tryUnmuteOnInteraction() {
-      if (isMuted) {
-        isMuted = false;
-        applyAudioMix();
-        playBothVideos();
-      }
-      window.removeEventListener("pointerdown", tryUnmuteOnInteraction);
-      window.removeEventListener("touchstart", tryUnmuteOnInteraction);
-      window.removeEventListener("keydown", tryUnmuteOnInteraction);
-    }
-    window.addEventListener("pointerdown", tryUnmuteOnInteraction, { passive: true });
-    window.addEventListener("touchstart", tryUnmuteOnInteraction, { passive: true });
-    window.addEventListener("keydown", tryUnmuteOnInteraction, { passive: true });
 
     let syncRaf = null;
     function syncVideos() {

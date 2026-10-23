@@ -165,14 +165,16 @@ const Animations = (() => {
     });
 
     // About content
-    gsap.from(".about__content > *", {
-      scrollTrigger: { trigger: ".about__content", start: "top 75%" },
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.08,
-      ease: "power3.out"
-    });
+    if (document.querySelector(".about__content")) {
+      gsap.from(".about__content > *", {
+        scrollTrigger: { trigger: ".about__content", start: "top 75%" },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.08,
+        ease: "power3.out"
+      });
+    }
 
     // Testimonials section reveal
     gsap.from(".quote-slider", {
